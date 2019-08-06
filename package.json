@@ -1,0 +1,50 @@
+{
+  "name": "fp_io-ts",
+  "version": "1.0.0",
+  "description": "Typescript with fp-ts and io-ts learning by examples",
+  "main": "./lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "fp-ts": "^2.0.3",
+    "io-ts": "^2.0.0",
+    "io-ts-reporters": "^1.0.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "clean": "rm -rf ./lib/*",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angcap/io_fp_ts_examples.git"
+  },
+  "keywords": [
+    "Typescript",
+    "fp-ts",
+    "io-ts"
+  ],
+  "author": {
+    "name": "Angelo Capone"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angcap/io_fp_ts_examples/issues"
+  },
+  "homepage": "https://github.com/angcap/io_fp_ts_examples#readme",
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts",
+  "devDependencies": {
+    "@types/jest": "^24.0.17",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2"
+  }
+}
