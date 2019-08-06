@@ -48,12 +48,22 @@ const ArrayFromCommaSeparatedStrings = new t.Type<string[], string, unknown>(
 	(a) => a.toString(),
 );
 
+
+/**
+ * [Rating validator and deserializer]
+ */
+const RatingV = t.type({
+	Source: t.string,
+	Value: t.string,
+});
+
 /**
  * [Movie Validator and Deserializer]
  */
 export const MovieV = t.type({
 	Genre: ArrayFromCommaSeparatedStrings,
 	Rated: t.string,
+	Ratings: t.array(RatingV),
 	Released: t.string,
 	Runtime: t.string,
 	Title: t.string,
@@ -66,4 +76,5 @@ export const MovieV = t.type({
  * @type {[type]}
  */
 export type MovieDto = t.TypeOf<typeof MovieV>;
+export type RatingDto = t.TypeOf<typeof RatingV>;
 

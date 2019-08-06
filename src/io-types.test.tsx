@@ -1,4 +1,4 @@
-import { MovieV, MovieDto, decodeToPromise } from "./io-types";
+import { decodeToPromise, MovieDto, MovieV, RatingDto } from "./io-types";
 import { PathReporter } from "io-ts/lib/PathReporter";
 import { none, some, Option, toUndefined, fold } from "fp-ts/lib/Option";
 import { isLeft } from "fp-ts/lib/Either";
@@ -73,9 +73,24 @@ describe("types checking step by step", () => {
 
   });
 
-  it("try to decode a movie getting a Promise. Wow!", () => {
-    const p: Promise<MovieDto> = decodeToPromise(MovieV, getMovieLiteral());
-    return expect(p).resolves.toMatchObject(expect.anything());
+  it("try to decode a movie getting a Promise. Wow!", async() => {
+    
+    expect.assertions(7);
+
+    const moviedto: MovieDto = await decodeToPromise(MovieV, getMovieLiteral());    
+    
+    expect(moviedto).toBeDefined();
+
+    expect(moviedto.Genre).toBeDefined();    
+    expect(moviedto.Genre.length > 0).toBeTruthy();
+    
+    expect(moviedto.Ratings).toBeDefined();
+    expect(moviedto.Ratings instanceof Array).toBeTruthy();
+    expect(moviedto.Ratings[0]).toBeDefined();    
+
+    const ratingDto: RatingDto = moviedto.Ratings[0];
+    
+    expect(ratingDto.Source).toBeDefined();
   });
 
 });
