@@ -25,7 +25,11 @@ const decode = (movie: any): Option<MovieDto> => {
   return isLeft(result) ? none : some(result.right);
 };
 
-
+/**
+ * [a function that take a DTO as argument]
+ * @param  {[type]} movie: MovieDto      [description]
+ * @return {[void]}                      [description]
+ */
 const printMessage = (movie: MovieDto) => {
   console.log(`Successfully decoded movie with title ${movie.Title} and genres: ${movie.Genre}`);
 };
@@ -73,24 +77,29 @@ describe("types checking step by step", () => {
 
   });
 
-  it("try to decode a movie getting a Promise. Wow!", async() => {
-    
-    expect.assertions(7);
+  it("try to decode a movie getting a Promise. Wow!", async () => {
 
-    const moviedto: MovieDto = await decodeToPromise(MovieV, getMovieLiteral());    
-    
+    expect.assertions(10);
+
+    const moviedto: MovieDto = await decodeToPromise(MovieV, getMovieLiteral());
+
     expect(moviedto).toBeDefined();
 
-    expect(moviedto.Genre).toBeDefined();    
+    expect(moviedto.Genre).toBeDefined();
     expect(moviedto.Genre.length > 0).toBeTruthy();
-    
+
     expect(moviedto.Ratings).toBeDefined();
     expect(moviedto.Ratings instanceof Array).toBeTruthy();
-    expect(moviedto.Ratings[0]).toBeDefined();    
+    expect(moviedto.Ratings[0]).toBeDefined();
 
     const ratingDto: RatingDto = moviedto.Ratings[0];
-    
-    expect(ratingDto.Source).toBeDefined();
+
+    expect(ratingDto.Value).toBeDefined();
+
+    expect(ratingDto.Value.points).toBeDefined();
+    expect(ratingDto.Value.scale).toBeDefined();
+
+    expect(ratingDto.Value.points <= ratingDto.Value.scale).toBeTruthy();
   });
 
 });
